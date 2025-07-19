@@ -65,7 +65,7 @@
                         </thead>
                         <tbody>
                             @foreach($tasks as $task)
-                                <tr class="border-t">
+                                <tr class="border-t hover:bg-zinc-50">
                                     <td class="p-2">{{ $task->title }}</td>
                                     <td class="p-2">{{ $task->description }}</td>
                                     <td class="p-2">{{ $task->due_date }}</td>
