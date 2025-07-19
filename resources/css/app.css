@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/public/fonts/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+  }
+
+th{
+    font-weight: 500;
+}
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #e2e1e1;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #fff; /* optional */
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #e2e1e1;
+}
+
+tr:last-child td {
+    border-bottom: none; 
+}
+
