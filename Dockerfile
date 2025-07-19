@@ -1,19 +1,18 @@
 FROM php:8.2-fpm-alpine
 
-# Install system and PHP dependencies
+# Install system dependencies
 RUN apk add --no-cache \
-    bash curl zip unzip git \
-    php8-pecl-intl \
-    php8-mysqli \
-    php8-mbstring \
-    php8-xml \
-    php8-bcmath \
-    php8-curl \
-    php8-soap \
-    php8-zip \
-    oniguruma-dev \
-    icu-dev \
-    && docker-php-ext-install pdo pdo_mysql intl bcmath
+    bash curl zip unzip git icu-dev oniguruma-dev libxml2-dev libzip-dev \
+    nodejs npm \
+    && docker-php-ext-install \
+        pdo \
+        pdo_mysql \
+        mbstring \
+        bcmath \
+        intl \
+        xml \
+        zip \
+        soap
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && \
@@ -25,18 +24,20 @@ WORKDIR /var/www
 # Copy app files
 COPY . .
 
-# Install PHP dependencies
+# Install Laravel PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
 # Build frontend
 WORKDIR /var/www/frontend
-RUN apk add --no-cache nodejs npm && \
-    npm install && npm run build
+RUN npm install && npm run build
 
+# Set back to Laravel root
 WORKDIR /var/www
+
+# Set permissions
 RUN chmod -R 775 storage bootstrap/cache
 
-# Copy start script
+# Deploy script
 COPY deploy.sh ./deploy.sh
 RUN chmod +x ./deploy.sh
 
