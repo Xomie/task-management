@@ -10,5 +10,15 @@ php artisan optimize
 # Create storage symlink
 php artisan storage:link
 
+# Self-ping loop to keep service awake (every 5 minutes)
+(
+  while true
+  do
+    echo "Pinging to stay awake..."
+    curl -s https://task-management-lox5.onrender.com/ping > /dev/null
+    sleep 300
+  done
+) &
+
 # Keep the container running
 wait

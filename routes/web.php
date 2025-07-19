@@ -27,4 +27,8 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::get('/ping', function () {
+    return response('pong', 200);
+});
+
 require __DIR__.'/auth.php';
