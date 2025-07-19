@@ -70,33 +70,35 @@
                                     <td class="p-2">{{ $task->description }}</td>
                                     <td class="p-2">{{ $task->due_date }}</td>
                                     <td class="p-2 {{$task->is_completed ? "text-green-700" : "text-orange-400"}}">{{ $task->is_completed ? 'Completed' : 'Pending' }}</td>
-                                    <td class="p-2 flex justify-center">
+                                    <td class="p-2">
 
-                                        <form action="{{ route('task.toggle', $task->id) }}" method="POST">
-                                            @csrf @method('PATCH')
-                                            <button class="p-2 rounded text-sm hover:bg-zinc-200">
-                                                 @if($task->is_completed)
-                                                        Mark as Pending
-                                                    @else
-                                                        <div class="flex items-center gap-x-1">
-                                                            {!! '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline lucide lucide-circle-check-big-icon"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>' !!}
-                                                        Mark as Completed
-                                                        </div>
-                                                    @endif
-                                            </button>
-                                        </form>
+                                        <div class="flex justify-center ">
+                                            <form action="{{ route('task.toggle', $task->id) }}" method="POST">
+                                                @csrf @method('PATCH')
+                                                <button class="p-2 rounded text-sm hover:bg-zinc-200">
+                                                    @if($task->is_completed)
+                                                            Mark as Pending
+                                                        @else
+                                                            <div class="flex items-center gap-x-1">
+                                                                {!! '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline lucide lucide-circle-check-big-icon"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>' !!}
+                                                            Mark as Completed
+                                                            </div>
+                                                        @endif
+                                                </button>
+                                            </form>
 
-                                        <a href="{{ route('task.edit', $task->id) }}" class="p-2 rounded text-sm hover:bg-zinc-200">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>
-                                        </a>
+                                            <a href="{{ route('task.edit', $task->id) }}" class="p-2 rounded text-sm hover:bg-zinc-200">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/></svg>
+                                            </a>
 
-                                        <form action="{{ route('task.destroy', $task->id) }}" method="POST">
-                                            @csrf @method('DELETE')
-                                            <button class=" p-2 rounded text-sm hover:bg-zinc-200"
-                                                onclick="return confirm('Are you sure?')">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                                            </button>
-                                        </form>
+                                            <form action="{{ route('task.destroy', $task->id) }}" method="POST">
+                                                @csrf @method('DELETE')
+                                                <button class=" p-2 rounded text-sm hover:bg-zinc-200"
+                                                    onclick="return confirm('Are you sure?')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                                </button>
+                                            </form>
+                                        </div>
 
                                     </td>
                                 </tr>
