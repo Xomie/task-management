@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Task;
+use App\Models\User;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Faker\Factory as Faker;
 
 class TaskSeeder extends Seeder
 {
@@ -15,6 +16,12 @@ class TaskSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
+        $userIds = User::pluck('id'); 
+
+        if ($userIds->isEmpty()) {
+            $this->command->warn('No users found. Please run the UserSeeder first.');
+            return;
+        }
 
         foreach (range(1, 10) as $i) {
             Task::create([
@@ -22,6 +29,7 @@ class TaskSeeder extends Seeder
                 'description' => $faker->text(100),
                 'due_date' => optional($faker->optional()->dateTimeBetween('+1 days', '+1 month'))->format('Y-m-d'),
                 'is_completed' => $faker->boolean(50),
+                'user_id' => $faker->randomElement($userIds), 
             ]);
         }
     }

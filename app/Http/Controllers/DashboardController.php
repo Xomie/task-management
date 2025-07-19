@@ -8,10 +8,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $recentTask = Task::latest()->take(5)->get();
+        $recentTask = Task::where('user_id', auth()->id())->latest()->take(5)->get();
 
-        $completedCount = Task::where('is_completed', true)->count();
-        $pendingCount = Task::where('is_completed', false)->count();
+        $completedCount = Task::where('user_id', auth()->id())->where('is_completed', true)->count();
+
+        $pendingCount = Task::where('user_id', auth()->id())->where('is_completed', false)->count();
 
         return view('dashboard', compact('recentTask', 'completedCount', 'pendingCount'));
     }

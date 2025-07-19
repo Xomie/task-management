@@ -1,7 +1,7 @@
 <?php
     $cards = [
-        ['title' => 'Pending Task', 'count' =>  $pendingCount, 'text' => 'text-yellow-800'],
-        ['title' => 'Completed Task', 'count' => $completedCount, 'text' => 'text-green-800'],
+        ['title' => 'Pending Task', 'count' =>  $pendingCount, 'text' => 'text-yellow-800', 'description' => 'Total count of tasks not yet completed.'],
+        ['title' => 'Completed Task', 'count' => $completedCount, 'text' => 'text-green-800', 'description' => 'Total number of tasks finished.'],
     ];
     ?>
 <x-app-layout>
@@ -12,6 +12,7 @@
                 <div class="h-44 border hover:shadow-md rounded-md p-6 hover:scale-95 {{ $card['text'] }} transition-transform">
                     <h1 class="text-xl font-medium">{{ $card['title']}}</h1>
                     <b class="text-6xl">{{$card['count']}}</b>
+                    <p class="text-sm text-zinc-500 mt-4">{{ $card['description'] }}</p>
                 </div>
             @endforeach
         </div>

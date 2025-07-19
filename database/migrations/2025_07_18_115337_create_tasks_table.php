@@ -16,7 +16,10 @@ return new class extends Migration {
             $table->text('description')->nullable();
             $table->date('due_date')->nullable();
             $table->boolean('is_completed')->default(false);
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
